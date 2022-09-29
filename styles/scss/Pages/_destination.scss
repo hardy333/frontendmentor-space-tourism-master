@@ -1,0 +1,200 @@
+@use "../Abstract/extension";
+@use "../Abstract/functions" as func;
+@use "../Abstract/mixins" as mix;
+@use "../Abstract/variables" as var;
+
+
+.destination {
+  padding: func.fluid(32, 5vw, 64) 0 func.fluid(57, 18vw, 118);
+
+  &__image-holder {
+    margin-bottom: func.fluid(26, 8vw, 53);
+    position: relative;
+  }
+
+  &__image {
+    min-height: func.fluid(170, 30vw, 445);
+    margin: 0 auto;
+    min-width: func.fluid(170, 30vw, 445);
+
+    &:last-of-type {
+      left: 50%;
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+    }
+
+    &.change {
+
+      &:last-of-type {
+        animation: changeOpacity 1s cubic-bezier(0, 0.4, 0.57, 0.48) forwards;
+      }
+    }
+  }
+}
+
+@keyframes changeOpacity {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+.tabs {
+
+  &__selections {
+    display: flex;
+    gap: 0 func.fluid(26, 5vw, 35);
+    justify-content: center;
+    margin-bottom: func.fluid(31, 5vw, 52);
+  }
+
+  &__choice {
+    background: none;
+    color: var.$blue;
+    font-size: func.fluid(14, 1.2vw, 16);
+    letter-spacing: 2.36px;
+    text-transform: uppercase;
+    padding: 0;
+    position: relative;
+    transition: color .45s ease;
+
+    &[aria-selected="true"] {
+      color: var.$white;
+
+      &::after {
+        background-color: var.$white;
+        transform: translateY(func.rem(12)) scaleX(1);
+      }
+    }
+
+    &::after {
+      content: "";
+      bottom: 0;
+      background-color: var.$blue;
+      left: 0;
+      height: func.rem(3);
+      position: absolute;
+      transition: background-color .5s ease,
+                  transform .5s ease;
+      transform-origin: center;
+      transform: translatey(func.rem(12)) scaleX(0);
+      width: 100%;
+    }
+  }
+
+  &__content {
+    max-width: func.rem(555);
+    margin: 0 auto;
+    text-align: center;
+
+    &-heading {
+      color: var.$white;
+      font-size: func.fluid(56, 10vw, 100);
+      font-weight: 400;
+      margin-bottom: func.fluid(0, 1vw, 14);
+      text-transform: uppercase;
+    }
+
+    &-information {
+      border-top: 1px solid rgba(56, 59, 75);
+      display: flex;
+      flex-wrap: wrap;
+      gap: func.rem(32) 0;
+      justify-content: center;
+      margin-top: func.fluid(32, 5vw, 54);
+      padding-top: func.rem(28);
+    }
+
+    &-info {
+      min-width: func.rem(216);
+      text-transform: uppercase;
+
+      p {
+
+        &:first-of-type {
+          color: var.$blue;
+          font-size: func.rem(14);
+          letter-spacing: 2.36px;
+          line-height: 1.25;
+          margin-bottom: func.rem(12);
+        }
+        
+        &:last-of-type {
+          color: var.$white;
+          font-family: 'Bellefair', serif;
+          font-size: func.rem(28);
+          line-height: 1.15;
+        }
+      }
+    }
+  }
+}
+
+
+@media (min-width: 48em) {
+
+}
+
+@media (min-width: 62.5em) {
+
+  .destination {
+    align-items: flex-start;
+    display: flex;
+    gap: 0 func.rem(20);
+    justify-content: space-between;
+
+    &__image-holder {
+      margin-bottom: 0;
+      padding-top: func.rem(8);
+    }
+
+    &__image {
+
+      &:last-of-type {
+        top: func.rem(8);
+      }
+    }
+  }
+
+  .tabs {
+    max-width: func.rem(445);
+    min-height: func.rem(467);
+
+    &__selections {
+      justify-content: flex-start;
+    }
+
+    &__choice {
+
+      &:hover {
+
+        &::after {
+          transform: translateY(func.rem(12)) scaleX(1);
+        }
+      }
+    }
+
+    &__content {
+      text-align: left;
+
+      &:focus-visible {
+        outline: 3px dashed rgb(104, 190, 205);
+        outline-offset: 3px;
+      }
+
+      &-information {
+        gap: 0 func.rem(80);
+        justify-content: flex-start;
+      }
+
+      &-info {
+        min-width: max-content;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,199 @@
+@use "../Abstract/extension";
+@use "../Abstract/functions" as func;
+@use "../Abstract/mixins" as mix;
+@use "../Abstract/variables" as var;
+
+body {
+  font-family: 'Barlow Condensed', sans-serif;
+  position: relative;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Bellefair', serif;
+}
+
+a,
+button {
+
+  &:focus-visible {
+    outline: 3px dashed rgb(104, 190, 205);
+    outline-offset: 3px;
+  }
+}
+
+p {
+  font-family: 'Barlow', sans-serif;
+  line-height: 1.78;
+}
+
+.main {
+  background: no-repeat center center;
+  background-size: 100% 100%;
+  min-height: 100vh;
+  transition: background-image .5s ease;
+
+  &--theme {
+
+    &-home {
+      background-image: url("/assets/home/background-home-mobile.jpg");
+    }
+
+    &-destination {
+      background-image: url("/assets/destination/background-destination-mobile.jpg");
+    }
+    
+    &-crew {
+      background-image: url("/assets/crew/background-crew-mobile.jpg");
+    }
+
+    &-technology {
+      background-image: url("/assets/technology/background-technology-mobile.jpg");
+    }
+  }
+
+  // preload
+  &::after {
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+    z-index: -1;
+    content: url("/assets/home/background-home-mobile.jpg") 
+              url("/assets/home/background-home-tablet.jpg")
+              url("/assets/home/background-home-desktop.jpg")
+              url("/assets/destination/background-destination-mobile.jpg") 
+              url("/assets/destination/background-destination-tablet.jpg")
+              url("/assets/destination/background-destination-desktop.jpg")
+              url("/assets/crew/background-crew-mobile.jpg") 
+              url("/assets/crew/background-crew-tablet.jpg")
+              url("/assets/crew/background-crew-desktop.jpg")
+              url("/assets/technology/background-technology-mobile.jpg") 
+              url("/assets/technology/background-technology-tablet.jpg")
+              url("/assets/technology/background-technology-desktop.jpg")
+  }
+}
+
+.hero {
+  padding: func.fluid(88, 17vw, 212) func.fluid(24, 6vw, 38) 0 ;
+
+  &__heading {
+    color: var.$blue;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 400;
+    font-size: func.fluid(16, 2.6vw, 28);
+    letter-spacing: 2.7px;
+    text-transform: uppercase;
+
+    &--padded {
+      max-width: max-content;
+      margin: 0 auto;
+      padding-left: func.fluid(18, 2vw, 24);
+      position: relative;
+    }
+  }
+
+  &__heading-number {
+    color: rgba(255, 255, 255, .35);
+    font-weight: 700;
+    inset: 0 auto auto 0;
+    position: absolute;
+    transform: translateX(-100%);
+  }
+
+  &__crew,
+  &__technology {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+
+// CUSTOMS
+.text-15 {
+  color: var.$blue;
+  font-size: func.fluid(15, 2.1vw, 18);
+}
+
+@media (min-width: 48em) {
+
+  .main {
+
+    &--theme {
+
+      &-home {
+        background-image: url("/assets/home/background-home-tablet.jpg");
+      }
+
+      &-destination {
+        background-image: url("/assets/destination/background-destination-tablet.jpg");
+      }
+
+      &-crew {
+        background-image: url("/assets/crew/background-crew-tablet.jpg");
+      }
+
+      &-technology {
+        background-image: url("/assets/technology/background-technology-tablet.jpg");
+      }
+    }
+  }
+
+  .hero {
+
+    &__heading {
+      margin: 0 auto 0 func.rem(24);
+
+      &-crew {
+        margin: 0 auto 0 func.rem(62);
+      }
+    }
+  }
+}
+
+@media (min-width: 62.5em) {
+
+  .main {
+
+    &--theme {
+
+      &-home {
+        background-image: url("/assets/home/background-home-desktop.jpg");
+      }
+
+      &-destination {
+        background-image: url("/assets/destination/background-destination-desktop.jpg");
+      }
+
+      &-crew {
+        background-image: url("/assets/crew/background-crew-desktop.jpg");
+      }
+
+      &-technology {
+        background-image: url("/assets/technology/background-technology-desktop.jpg");
+      }
+    }
+  }
+
+  .hero {
+    max-width: func.rem(1440);
+    margin: 0 auto;
+    padding: func.fluid(88, 17vw, 212) func.fluid(90, 11.5vw, 165) 0 ;
+  
+    &__heading {
+      letter-spacing: 4.72px;
+      margin: 0;
+    }
+
+    &__crew,
+    &__technology {
+      padding: func.fluid(88, 17vw, 212) 0 0 func.fluid(90, 11.5vw, 165);
+    }
+  }
+}
